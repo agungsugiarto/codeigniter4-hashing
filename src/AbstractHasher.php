@@ -2,6 +2,10 @@
 
 namespace Illuminate\Hashing;
 
+use function password_get_info;
+use function password_verify;
+use function strlen;
+
 abstract class AbstractHasher
 {
     /**

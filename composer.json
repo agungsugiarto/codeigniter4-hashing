@@ -1,26 +1,33 @@
 {
-    "name": "illuminate/hashing",
+    "name": "agungsugiarto/codeigniter4-hashing",
     "description": "The Illuminate Hashing package.",
     "license": "MIT",
-    "homepage": "https://laravel.com",
-    "support": {
-        "issues": "https://github.com/laravel/framework/issues",
-        "source": "https://github.com/laravel/framework"
-    },
     "authors": [
         {
             "name": "Taylor Otwell",
             "email": "taylor@laravel.com"
+        },
+        {
+            "name": "Agung Sugiarto",
+            "email": "me.agungsugiarto@gmail.com"
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
-        "illuminate/contracts": "^9.0",
-        "illuminate/support": "^9.0"
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "codeigniter4/framework": "^4.0",
+        "laminas/laminas-coding-standard": "^2.1",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {
-            "Illuminate\\Hashing\\": ""
+            "Illuminate\\Hashing\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Illuminate\\Hashing\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -31,5 +38,11 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --testdox --colors=always"
+    }
 }

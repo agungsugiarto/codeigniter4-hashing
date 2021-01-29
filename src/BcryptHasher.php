@@ -2,8 +2,13 @@
 
 namespace Illuminate\Hashing;
 
-use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use Illuminate\Hashing\Contracts\Hasher as HasherContract;
 use RuntimeException;
+
+use function password_hash;
+use function password_needs_rehash;
+
+use const PASSWORD_BCRYPT;
 
 class BcryptHasher extends AbstractHasher implements HasherContract
 {
@@ -29,7 +34,7 @@ class BcryptHasher extends AbstractHasher implements HasherContract
      */
     public function __construct(array $options = [])
     {
-        $this->rounds = $options['rounds'] ?? $this->rounds;
+        $this->rounds          = $options['rounds'] ?? $this->rounds;
         $this->verifyAlgorithm = $options['verify'] ?? $this->verifyAlgorithm;
     }
 
@@ -39,8 +44,7 @@ class BcryptHasher extends AbstractHasher implements HasherContract
      * @param  string  $value
      * @param  array  $options
      * @return string
-     *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function make($value, array $options = [])
     {
@@ -62,8 +66,7 @@ class BcryptHasher extends AbstractHasher implements HasherContract
      * @param  string  $hashedValue
      * @param  array  $options
      * @return bool
-     *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function check($value, $hashedValue, array $options = [])
     {

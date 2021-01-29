@@ -2,39 +2,42 @@
 
 namespace Illuminate\Hashing;
 
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Support\Manager;
+use Illuminate\Hashing\Argon2IdHasher;
+use Illuminate\Hashing\ArgonHasher;
+use Illuminate\Hashing\BcryptHasher;
+use Illuminate\Hashing\Contracts\Hasher as ContractsHasher;
+use Illuminate\Hashing\Supports\Manager;
 
-class HashManager extends Manager implements Hasher
+class HashManager extends Manager implements ContractsHasher
 {
     /**
      * Create an instance of the Bcrypt hash Driver.
      *
-     * @return \Illuminate\Hashing\BcryptHasher
+     * @return BcryptHasher
      */
     public function createBcryptDriver()
     {
-        return new BcryptHasher($this->config->get('hashing.bcrypt') ?? []);
+        return new BcryptHasher($this->config->bcrypt ?? []);
     }
 
     /**
      * Create an instance of the Argon2i hash Driver.
      *
-     * @return \Illuminate\Hashing\ArgonHasher
+     * @return ArgonHasher
      */
     public function createArgonDriver()
     {
-        return new ArgonHasher($this->config->get('hashing.argon') ?? []);
+        return new ArgonHasher($this->config->argon ?? []);
     }
 
     /**
      * Create an instance of the Argon2id hash Driver.
      *
-     * @return \Illuminate\Hashing\Argon2IdHasher
+     * @return Argon2IdHasher
      */
     public function createArgon2idDriver()
     {
-        return new Argon2IdHasher($this->config->get('hashing.argon') ?? []);
+        return new Argon2IdHasher($this->config->argon ?? []);
     }
 
     /**
@@ -92,6 +95,6 @@ class HashManager extends Manager implements Hasher
      */
     public function getDefaultDriver()
     {
-        return $this->config->get('hashing.driver', 'bcrypt');
+        return $this->config->driver;
     }
 }

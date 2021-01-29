@@ -4,6 +4,11 @@ namespace Illuminate\Hashing;
 
 use RuntimeException;
 
+use function password_verify;
+use function strlen;
+
+use const PASSWORD_ARGON2ID;
+
 class Argon2IdHasher extends ArgonHasher
 {
     /**
@@ -13,8 +18,7 @@ class Argon2IdHasher extends ArgonHasher
      * @param  string  $hashedValue
      * @param  array  $options
      * @return bool
-     *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function check($value, $hashedValue, array $options = [])
     {
